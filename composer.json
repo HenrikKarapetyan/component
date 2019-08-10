@@ -1,0 +1,13 @@
+{
+  "name": "henrik/component",
+  "type": "library",
+  "license": "BSD",
+  "minimum-stability": "dev",
+  "description": "",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "henrik\\component\\": "src/"
+    }
+  }
+}
