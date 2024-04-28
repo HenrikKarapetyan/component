@@ -15,34 +15,34 @@ namespace henrik\component;
 interface ComponentInterface
 {
     /**
-     * @param $name
+     * @param string $name
      * @param bool $checkVars
-     * @return mixed
+     * @return bool
      */
-    public function canGetProperty($name, $checkVars = true);
+    public function canGetProperty(string $name, bool $checkVars = true): bool;
 
     /**
-     * @param $name
+     * @param string $name
      * @param bool $checkVars
-     * @return mixed
+     * @return bool
      */
-    public function canSetProperty($name, $checkVars = true);
+    public function canSetProperty(string $name, bool $checkVars = true): bool;
 
     /**
-     * @param $name
-     * @return mixed
+     * @param string $name
+     * @return bool
      */
-    public function hasMethod($name);
+    public function hasMethod(string $name): bool;
 
     /**
-     * @param $name
+     * @param string $name
      * @param bool $checkVars
-     * @return mixed
+     * @return bool
      */
-    public function hasProperty($name, $checkVars = true);
+    public function hasProperty(string $name, bool $checkVars = true): bool;
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getClassName();
+    public function getClassName(): string;
 }

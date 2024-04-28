@@ -4,10 +4,34 @@
   "license": "BSD",
   "minimum-stability": "dev",
   "description": "",
-  "require": {},
+  "require": {
+    "php": ">=8.2"
+  },
   "autoload": {
     "psr-4": {
       "henrik\\component\\": "src/"
     }
+  },
+  "require-dev": {
+    "phpmd/phpmd": "^2.15"
+  },
+  "scripts": {
+    "phpstan": [
+      "Composer\\Config::disableProcessTimeout",
+      "php -dmemory_limit=256M ./bin/console cache:warm --env=test",
+      "./vendor/bin/phpstan --memory-limit=-1"
+    ],
+    "fix": [
+      "Composer\\Config::disableProcessTimeout",
+      "PHP_CS_FIXER_IGNORE_ENV=1 ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src tests --diff -vvv --config=.php-cs-fixer.dist.php"
+    ],
+    "phpmd-ci": [
+      "Composer\\Config::disableProcessTimeout",
+      "./vendor/bin/phpmd ./src gitlab ./phpmd.xml > phpmd-report.json"
+    ],
+    "phpmd-html": [
+      "Composer\\Config::disableProcessTimeout",
+      "./vendor/bin/phpmd ./src html ./phpmd.xml > phpmd-report.html"
+    ]
   }
 }

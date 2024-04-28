@@ -1,2 +1,4 @@
 .idea/
 vendor/
+
+phpmd-report.html

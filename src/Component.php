@@ -9,6 +9,7 @@
 namespace henrik\component;
 
 use henrik\component\exceptions\InvalidCallException;
+use henrik\component\exceptions\ReadOnlyPropertyCallException;
 use henrik\component\exceptions\UnknownMethodException;
 use henrik\component\exceptions\UnknownPropertyException;
 
@@ -21,7 +22,7 @@ class Component implements ComponentInterface
     /**
      * @return string
      */
-    public function getClassName()
+    public function getClassName(): string
     {
         return get_called_class();
     }
@@ -38,17 +39,17 @@ class Component implements ComponentInterface
         if (method_exists($this, $getter)) {
             return $this->$getter();
         } elseif (method_exists($this, 'set' . $name)) {
-            throw new InvalidCallException('Getting write-only property: ' . get_class($this) . '::' . $name);
+            throw new InvalidCallException(get_class($this), $name);
         }
 
-        throw new UnknownPropertyException('Getting unknown property: ' . get_class($this) . '::' . $name);
+        throw new UnknownPropertyException(get_class($this), $name);
     }
 
     /**
      * @param $name
      * @param $value
      * @throws InvalidCallException
-     * @throws UnknownPropertyException
+     * @throws UnknownPropertyException|ReadOnlyPropertyCallException
      */
     public function __set($name, $value)
     {
@@ -56,9 +57,9 @@ class Component implements ComponentInterface
         if (method_exists($this, $setter)) {
             $this->$setter($value);
         } elseif (method_exists($this, 'get' . $name)) {
-            throw new InvalidCallException('Setting read-only property: ' . get_class($this) . '::' . $name);
+            throw new ReadOnlyPropertyCallException(get_class($this), $name);
         } else {
-            throw new UnknownPropertyException('Setting unknown property: ' . get_class($this) . '::' . $name);
+            throw new UnknownPropertyException(get_class($this), $name);
         }
     }
 
@@ -87,7 +88,7 @@ class Component implements ComponentInterface
         if (method_exists($this, $setter)) {
             $this->$setter(null);
         } elseif (method_exists($this, 'get' . $name)) {
-            throw new InvalidCallException('Unsetting read-only property: ' . get_class($this) . '::' . $name);
+            throw new InvalidCallException(get_class($this), $name);
         }
     }
 
@@ -98,16 +99,16 @@ class Component implements ComponentInterface
      */
     public function __call($name, $params)
     {
-        throw new UnknownMethodException('Calling unknown method: ' . get_class($this) . "::$name()");
+        throw new UnknownMethodException(get_class($this), $name);
     }
 
 
     /**
-     * @param $name
+     * @param string $name
      * @param bool $checkVars
      * @return bool
      */
-    public function hasProperty($name, $checkVars = true)
+    public function hasProperty(string $name, bool $checkVars = true): bool
     {
         return $this->canGetProperty($name, $checkVars) || $this->canSetProperty($name, false);
     }
@@ -117,7 +118,7 @@ class Component implements ComponentInterface
      * @param bool $checkVars
      * @return bool
      */
-    public function canGetProperty($name, $checkVars = true)
+    public function canGetProperty($name, bool $checkVars = true): bool
     {
         return method_exists($this, 'get' . $name) || $checkVars && property_exists($this, $name);
     }
@@ -127,16 +128,16 @@ class Component implements ComponentInterface
      * @param bool $checkVars
      * @return bool
      */
-    public function canSetProperty($name, $checkVars = true)
+    public function canSetProperty($name, bool $checkVars = true): bool
     {
         return method_exists($this, 'set' . $name) || $checkVars && property_exists($this, $name);
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return bool
      */
-    public function hasMethod($name)
+    public function hasMethod(string $name): bool
     {
         return method_exists($this, $name);
     }
