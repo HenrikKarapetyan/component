@@ -1,7 +1,7 @@
 {
   "name": "henrik/component",
   "type": "library",
-  "license": "BSD",
+  "license": "GPL-2.0-only",
   "minimum-stability": "dev",
   "description": "",
   "require": {
