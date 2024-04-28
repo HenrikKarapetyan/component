@@ -13,17 +13,18 @@
     }
   },
   "require-dev": {
-    "phpmd/phpmd": "^2.15"
+    "phpmd/phpmd": "^2.15",
+    "friendsofphp/php-cs-fixer": "dev-master",
+    "phpstan/phpstan": "2.0.x-dev"
   },
   "scripts": {
     "phpstan": [
       "Composer\\Config::disableProcessTimeout",
-      "php -dmemory_limit=256M ./bin/console cache:warm --env=test",
       "./vendor/bin/phpstan --memory-limit=-1"
     ],
     "fix": [
       "Composer\\Config::disableProcessTimeout",
-      "PHP_CS_FIXER_IGNORE_ENV=1 ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src tests --diff -vvv --config=.php-cs-fixer.dist.php"
+      "PHP_CS_FIXER_IGNORE_ENV=1 ./vendor/bin/php-cs-fixer fix src --diff -vvv --config=.php-cs-fixer.dist.php"
     ],
     "phpmd-ci": [
       "Composer\\Config::disableProcessTimeout",

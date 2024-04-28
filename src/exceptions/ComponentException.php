@@ -1,16 +1,10 @@
 <?php
 
-
 namespace henrik\component\exceptions;
-
 
 use Exception;
 
 /**
- * Class ComponentException
- * @package henrik\component\exceptions
+ * Class ComponentException.
  */
-class ComponentException extends Exception
-{
-
-}
+class ComponentException extends Exception {}

@@ -1,13 +1,11 @@
 <?php
 
-
 namespace henrik\component\exceptions;
 
 use Throwable;
 
 /**
- * Class UnknownPropertyException
- * @package henrik\component\exceptions
+ * Class UnknownPropertyException.
  */
 class UnknownPropertyException extends ComponentException
 {

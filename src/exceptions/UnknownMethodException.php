@@ -1,6 +1,5 @@
 <?php
 
-
 namespace henrik\component\exceptions;
 
 use Throwable;

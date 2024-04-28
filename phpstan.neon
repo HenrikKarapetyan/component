@@ -1,13 +1,4 @@
-includes:
-	- vendor/phpstan/phpstan-symfony/extension.neon
-	- vendor/phpstan/phpstan-doctrine/extension.neon
-
 parameters:
 	level: 9
 	paths:
 		- src
-		- tests
-	doctrine:
-		objectManagerLoader: tests/object-manager.php
-	symfony:
-		containerXmlPath: var/cache/test/App_KernelTestDebugContainer.xml
