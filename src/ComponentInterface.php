@@ -6,7 +6,7 @@
  * Time: 1:39 PM.
  */
 
-namespace henrik\component;
+namespace Henrik\Component;
 
 /**
  * Interface ComponentInterface.

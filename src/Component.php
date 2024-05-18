@@ -6,12 +6,12 @@
  * Time: 12:53 PM.
  */
 
-namespace henrik\component;
+namespace Henrik\Component;
 
-use henrik\component\exceptions\InvalidCallException;
-use henrik\component\exceptions\ReadOnlyPropertyCallException;
-use henrik\component\exceptions\UnknownMethodException;
-use henrik\component\exceptions\UnknownPropertyException;
+use Henrik\Component\Exceptions\InvalidCallException;
+use Henrik\Component\Exceptions\ReadOnlyPropertyCallException;
+use Henrik\Component\Exceptions\UnknownMethodException;
+use Henrik\Component\Exceptions\UnknownPropertyException;
 
 /**
  * Class Component.
@@ -21,10 +21,10 @@ class Component implements ComponentInterface
     /**
      * @param string $name
      *
-     * @return mixed
      * @throws UnknownPropertyException
-     *
      * @throws InvalidCallException
+     *
+     * @return mixed
      */
     public function __get(string $name)
     {
@@ -41,7 +41,7 @@ class Component implements ComponentInterface
 
     /**
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @throws ReadOnlyPropertyCallException
      * @throws UnknownPropertyException
@@ -54,6 +54,7 @@ class Component implements ComponentInterface
         } elseif (method_exists($this, 'get' . $name)) {
             throw new ReadOnlyPropertyCallException(get_class($this), $name);
         }
+
         throw new UnknownPropertyException(get_class($this), $name);
     }
 
@@ -88,7 +89,7 @@ class Component implements ComponentInterface
     }
 
     /**
-     * @param string $name
+     * @param string                   $name
      * @param array<int|string, mixed> $params
      *
      * @throws UnknownMethodException
@@ -108,7 +109,7 @@ class Component implements ComponentInterface
 
     /**
      * @param string $name
-     * @param bool $checkVars
+     * @param bool   $checkVars
      *
      * @return bool
      */
@@ -119,7 +120,7 @@ class Component implements ComponentInterface
 
     /**
      * @param string $name
-     * @param bool $checkVars
+     * @param bool   $checkVars
      *
      * @return bool
      */
@@ -130,7 +131,7 @@ class Component implements ComponentInterface
 
     /**
      * @param string $name
-     * @param bool $checkVars
+     * @param bool   $checkVars
      *
      * @return bool
      */

@@ -3,7 +3,7 @@
 ### Here is the example hpw to use component
 
 ```php
-use henrik\component\Component;
+use Henrik\Component\Component;
 
 require "../vendor/autoload.php";
 
